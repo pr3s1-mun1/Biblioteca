@@ -270,42 +270,7 @@
         <div class="logo">
             <img src="{% static 'images/Juarez2024-2027-03.png' %}" alt="">
         </div>
-        <nav class="main-nav">
-            <div class="nav-item">
-                <a href="#" class="nav-link">Sitios de interes</a>
-                <div class="submenu">
-                    <a href="#">Coleccion Digital DGB</a>
-                </div>
-            </div>
-            <div class="nav-item">
-                <a href="#" class="nav-link">Eventos</a>
-                <div class="submenu">
-                    <a href="#">Talleres</a>
-                    <a href="#">Charlas</a>
-                </div>
-            </div>
-            <div class="nav-item">
-                <a href="#" class="nav-link">Aprendizaje & Tecnologia</a>
-                <div class="submenu">
-                    <a href="#">Recursos Digitales</a>
-                </div>
-            </div>
-            <div class="nav-item">
-                <a href="#" class="nav-link">Servicios</a>
-                <div class="submenu">
-                    <a href="#">Préstamos</a>
-                    <a href="#">Consulta en Sala</a>
-                </div>
-            </div>
-            <div class="nav-item">
-                <a href="#" class="nav-link">Sobre nosotros</a>
-                <div class="submenu">
-                    <a href="#">Historia</a>
-                    <a href="#">Contacto</a>
-                </div>
-            </div>
-        </nav>
-        <a href="http://127.0.0.1:8000/usuarios/login/" class="account-btn">Mi Cuenta</a>
+        {% include 'navbar.html' %}
     </header>
     <div class="container">
 
@@ -327,45 +292,7 @@
             Este servicio tiene un horario límite y concluye cada día a las 10:59pm.</h3>
     </div>
     <!-- Footer -->
-    <footer>
-        <div class="footer-column">
-            <img src="{% static 'images/jrz24-47-02.png' %}" alt="Ciudad Juárez Logo">
-            <p>Red de Bibliotecas Públicas Municipales de Ciudad Juárez, comprometidos con el fomento a la lectura y el acceso a la información.</p>
-            <div class="social-icons">
-                <a href="https://facebook.com" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                <a href="https://instagram.com" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                <a href="https://youtube.com" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
-                <a href="https://twitter.com" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-                
-            </div>
-        </div>
-        <div class="footer-column">
-            <h3>Enlaces Rápidos</h3>
-            <ul>
-                <li><a href="#">Inicio</a></li>
-                <li><a href="#">Catálogo</a></li>
-                <li><a href="#">Servicios</a></li>
-                <li><a href="#">Eventos</a></li>
-                <li><a href="#">Bibliotecas</a></li>
-            </ul>
-        </div>
-        <div class="footer-column">
-            <h3>Servicios</h3>
-            <ul>
-                <li><a href="#">Préstamo de libros</a></li>
-                <li><a href="#">Recursos digitales</a></li>
-                <li><a href="#">Clubes de lectura</a></li>
-                <li><a href="#">Talleres culturales</a></li>
-                <li><a href="#">Sala de cómputo</a></li>
-            </ul>
-        </div>
-        <div class="footer-column">
-            <h3>Contacto</h3>
-            <p>📍 Av. 16 de Septiembre 1818, Ciudad Juárez, Chihuahua</p>
-            <p>📞 (656) 123-4567</p>
-            <p>📧 <a href="mailto:bibliotecas@juarez.gob.mx">bibliotecas@juarez.gob.mx</a></p>
-        </div>
-    </footer>
+    {% include 'footer.html' %}
 </body>
 <script>
     document.addEventListener('DOMContentLoaded', function() {

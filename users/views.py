@@ -61,11 +61,72 @@ def perfil_usuario(request):
         'prestamos': prestamos,
     })
 
-# Agregar al final del archivo views.py de users
+import math
+from geopy.geocoders import Nominatim
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import render
+from bibliotecas.models import Biblioteca
+
+geolocator = Nominatim(user_agent="bibliotecas_app")
+
+
+def calcular_distancia(lat1, lon1, lat2, lon2):
+    R = 6371  # km
+
+    dlat = math.radians(lat2 - lat1)
+    dlon = math.radians(lon2 - lon1)
+
+    a = math.sin(dlat/2)**2 + math.cos(math.radians(lat1)) * math.cos(math.radians(lat2)) * math.sin(dlon/2)**2
+    c = 2 * math.atan2(math.sqrt(a), math.sqrt(1-a))
+
+    return R * c
+
+
 @login_required
 def user_dashboard(request):
-    """Vista para el dashboard de usuarios normales"""
-    return render(request, 'users/user_dashboard.html')
+    prestamos = Prestamo.objects.filter(usuario=request.user).select_related('libro')
+
+    lat = request.GET.get('lat')
+    lon = request.GET.get('lon')
+
+    bibliotecas = []
+
+    if lat and lon:
+        lat = float(lat)
+        lon = float(lon)
+
+        for b in Biblioteca.objects.all():
+            direccion = f"{b.direccion}, {b.ubicacion}, Chihuahua, Mexico"
+
+            try:
+                location = geolocator.geocode(direccion, timeout=10)
+
+                if location:
+                    dist = calcular_distancia(
+                        lat, lon,
+                        location.latitude,
+                        location.longitude
+                    )
+
+                    bibliotecas.append({
+                        'nombre': b.nombre,
+                        'direccion': b.direccion,
+                        'distancia': dist
+                    })
+
+            except Exception:
+                continue
+
+        bibliotecas.sort(key=lambda x: x['distancia'])
+        bibliotecas = bibliotecas[:5]
+
+    context = {
+        'prestamos': prestamos,
+        'prestamos_count': prestamos.count(),
+        'bibliotecas': bibliotecas
+    }
+
+    return render(request, 'users/user_dashboard.html', context)
 
 class AdminRequiredMixin(UserPassesTestMixin):
     """Mixin para verificar que el usuario sea administrador"""

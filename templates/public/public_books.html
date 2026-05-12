@@ -41,6 +41,15 @@
             color: #ff6f61; /* Hover color */
         }
 
+        .register-btn {
+            background-color: #922453;
+            color: #ffffff;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 25px; /* Rounded corners */
+            font-size: 16px;
+        }
+
         /* Submenu styling */
         .submenu {
             display: none; /* Hidden by default */
@@ -299,57 +308,80 @@
             color: #d3b7c3;
         }
 </style>
-<body>
-    {% include 'navbar.html' %}
-    <!-- Barra de búsqueda -->
-    <div class="catalog-controls">
-        <div class="search-bar">
-            <input type="text" class="form-control" placeholder="Search by title, author, ISBN..." name="query" value="{{ request.GET.query }}">
-            <button class="btn btn-primary" type="submit" form="search-form">Buscar</button>
+{% include 'navbar.html' %}
+
+<div class="container py-4">
+
+    <!-- 🔍 Buscador -->
+    <form id="search-form" method="get" action="{% url 'public_books' %}" class="mb-4">
+        <div class="input-group">
+            <input type="text" 
+                   class="form-control" 
+                   placeholder="Buscar por título, autor o ISBN..." 
+                   name="query" 
+                   value="{{ request.GET.query }}">
+            <button class="btn btn-primary" type="submit">
+                Buscar
+            </button>
         </div>
-    </div>
+    </form>
 
-    <!-- Formulario para búsqueda -->
-    <form id="search-form" method="get" action="{% url 'public_books' %}"></form>
-
-    <!-- Catálogo de libros -->
-    <div class="book-catalog">
+    <!-- 📚 Catálogo -->
+    <div class="row g-4">
         {% for libro in libros %}
-        <div class="book-card">
-            <!-- Imagen de portada -->
-            <div class="book-cover">
+        <div class="col-md-6 col-lg-4">
+            <div class="card h-100 shadow-sm">
+
+                <!-- Imagen -->
                 {% if libro.portada %}
-                    <img src="{{ libro.portada.url }}" alt="{{ libro.titulo }} cover">
+                    <img src="{{ libro.portada.url }}" 
+                         class="card-img-top" 
+                         style="height: 250px; object-fit: cover;"
+                         alt="{{ libro.titulo }}">
                 {% else %}
-                    <img src="https://via.placeholder.com/150x200.png?text=No+Cover" alt="No cover">
+                    <img src="https://via.placeholder.com/150x200.png?text=No+Cover" 
+                         class="card-img-top" 
+                         style="height: 250px; object-fit: cover;"
+                         alt="No cover">
                 {% endif %}
-            </div>
-            <!-- Información del libro -->
-            <div class="book-info">
-                <h3>{{ libro.titulo }} <span class="status {% if libro.estado == 'available' %}available{% elif libro.estado == 'reserved' %}reserved{% else %}not-available{% endif %}">
-                    {{ libro.estado }}
-                </span></h3>
-                <p class="author">{{ libro.autor }}</p>
-                <p class="description">{{ libro.descripcion|truncatewords:20 }}</p>
-                <p class="location"><span class="icon">📍</span> {{ libro.biblioteca }}</p>
-                <p class="isbn"><span class="icon">🔢</span> ISBN: {{ libro.isbn|default:"N/A" }}</p>
-                <!-- Botón de reserva -->
-                <a href="{% url 'reservar_libro' %}?libro_id={{ libro.id }}" class="reserve-btn {% if libro.estado == 'available' %}available{% else %}disabled{% endif %}">
-                    {% if libro.estado == 'Disponible' %}
-                    <span class="badge bg-success">{{ libro.estado }}</span>
-                    {% else %}
-                    <span class="badge bg-warning">{{ libro.estado }}</span>
-                    {% endif %}
-                </a>
+
+                <!-- Contenido -->
+                <div class="card-body d-flex flex-column">
+                    <h5 class="card-title">{{ libro.titulo }}</h5>
+                    <p class="text-muted mb-1">{{ libro.autor }}</p>
+
+                    <p class="card-text small">
+                        {{ libro.descripcion|truncatewords:20 }}
+                    </p>
+
+                    <p class="small mb-1">📍 {{ libro.biblioteca }}</p>
+                    <p class="small mb-3">🔢 ISBN: {{ libro.isbn|default:"N/A" }}</p>
+
+                    <!-- Botón -->
+                    <div class="mt-auto">
+                        <a href="{% url 'reservar_libro' %}?libro_id={{ libro.id }}"
+                           class="btn w-100 {% if libro.estado == 'available' %}btn-success{% else %}btn-secondary disabled{% endif %}">
+                           
+                            {% if libro.estado == 'available' %}
+                                Reservar
+                            {% else %}
+                                No disponible
+                            {% endif %}
+                        </a>
+                    </div>
+                </div>
 
             </div>
         </div>
         {% empty %}
-        <p>No hay libros disponibles.</p>
+        <div class="col-12 text-center">
+            <p class="text-muted">No hay libros disponibles.</p>
+        </div>
         {% endfor %}
     </div>
-        <!-- Footer -->
-    {% include 'footer.html' %}
+
+</div>
+
+{% include 'footer.html' %}
     
-</body>
 {% endblock %}

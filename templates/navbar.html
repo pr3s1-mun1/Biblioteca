@@ -52,6 +52,9 @@ color: #d9534f;
     <nav class="main-nav">
 
         <div class="nav-item">
+            <a href="/" class="nav-link">Inicio</a>
+        </div>
+        <div class="nav-item">
             <a href="#" class="nav-link">Eventos</a>
             <div class="submenu">
                 <a href="{% url 'lista_biblioaprende' %}">Agenda Biblio Aprende</a>
@@ -103,7 +106,7 @@ color: #d9534f;
 
     <div class="nav-item user-menu">
         <span class="nav-link">
-            Bienvenido, {{ user.username|capfirst }}
+            Bienvenido, {{ user.get_full_name|default:user.username }}
         </span>
 
     <div class="submenu">
@@ -116,7 +119,6 @@ color: #d9534f;
     {% else %}
     <div class="nav-actions">
         <a class="register-btn" href="/usuarios/login/">Iniciar Sesión</a>
-        <a href="/usuarios/registro/" class="account-btn">Registrarse</a>
     </div>
     {% endif %}
 

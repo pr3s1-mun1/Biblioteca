@@ -208,60 +208,8 @@
 
 </style>
 
-    <header>
-        <div class="logo">
-            <img src="{% static 'images/newbiblioteca.png' %}" alt="Logo">
-        </div>
-        <nav class="main-nav">
+    {% include 'navbar.html' %}    
 
-            <div class="nav-item">
-                <a href="#" class="nav-link">Eventos</a>
-                <div class="submenu">
-                    <a href="{% url 'agenda_cultural' %}">Agenda Cultural</a>
-                </div>
-            </div>
-            <div class="nav-item">
-                <a href="#" class="nav-link">Aprendizaje & Tecnologia</a>
-                <div class="submenu">
-                    <a href="{% url 'coleccion_digital' %}">Colección Digital DGB</a>
-                    <a href="https://wordwall.net/es-mx/community/la-biblioteca">Juega y aprende</a>
-                </div>
-            </div>
-            <div class="nav-item">
-                <a href="#" class="nav-link">Servicios</a>
-                    <div class="submenu">
-                        <div class="dropdown">
-                            <a href="#">Préstamos</a>
-                            <div class="dropdown-content">
-                                <a href="{% url 'prestamos' %}">Préstamo de libros en salas</a>
-                                <a href="{% url 'prestamo_domicilio' %}">Préstamo de libros a domicilio</a>
-                            </div>
-                        </div>
-                        <a href="{% url 'credencializacion' %}">Credencialización</a>
-                        <a href="{% url 'referencia' %}">Referencia</a>
-                        <a href="{% url 'servicio_digital' %}">Servicios Digitales</a>
-                        <a href="{% url 'servicio_cultural' %}">Servicios Culturales</a>
-                        <a href="{% url 'servicio_educativo' %}">Servicio educativo</a>
-                    </div>
-            </div>
-            <div class="nav-item">
-                <a href="#" class="nav-link">Nuestra Historia</a>
-                <div class="submenu">
-                </div>
-            </div>
-            <div class="nav-item">
-                <a href="#" class="nav-link">Sobre nosotros</a>
-                <div class="submenu">
-                    <a href="{% url 'nosotros' %}">Nosotros</a>
-                    <a href="{% url 'contacto' %}">Contacto</a>
-                </div>
-            </div>
-        </nav>
-        <div class="nav-actions">
-            <button class="register-btn" onclick="register()">Registrarse</button>
-            <a href="/usuarios/login/" class="account-btn">Mi Cuenta</a>
-        </div>
-    </header>
     <div class="eventos-container">
         <h2>Agenda Biblio Aprende</h2>
 
@@ -290,4 +238,5 @@
             <p>No hay eventos disponibles.</p>
         {% endif %}
     </div>
+
 {% endblock %}
