@@ -7,7 +7,7 @@ __pycache__/
 # Es vital no subir la carpeta del entorno para que el proyecto sea portable
 venv/
 
-# Logs del sistema y de Django.
+# Logs del sistema y de Django
 *.log
 local_settings.py
 
