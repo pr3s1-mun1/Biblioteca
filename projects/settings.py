@@ -122,30 +122,46 @@ WSGI_APPLICATION = 'projects.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-BDD_PRUEBA = True 
+AMBIENTE = 'PRUEBA'
 
-if BDD_PRUEBA:
-    DATABASES = {
-        'default': {
-            'ENGINE' : 'django.db.backends.postgresql',
-            'NAME' : 'Biblios',
-            'USER' : 'postgres',
-            'PASSWORD' : '123456',
-            'HOST' : '10.236.62.93',
-            'PORT' : '5433',
+BD_ALL = {
+        'PRUEBA' : { 
+            'default': {
+                'ENGINE' : 'django.db.backends.postgresql',
+                'NAME' : 'Biblios',
+                'USER' : 'spif_user',
+                'PASSWORD' : 'temporal',
+                'HOST' : '10.236.62.44',
+                'PORT' : '5434',
+            }
+        },
+        'PRUEBA_OLD' : {
+            'default': {
+                'ENGINE' : 'django.db.backends.postgresql',
+                'NAME' : 'Biblios',
+                'USER' : 'postgres',
+                'PASSWORD' : '123456',
+                'HOST' : '10.236.62.93',
+                'PORT' : '5433',
+            }
+        },
+        'PRODUCCION' : {
+            'default': {
+                'ENGINE' : 'django.db.backends.postgresql',
+                'NAME' : 'Biblios',
+                'USER' : 'usr_biblios',
+                'PASSWORD' : 'Ys3r.818lio5',
+                'HOST' : '10.236.62.59',
+                'PORT' : '5432',
+            }
         }
     }
-else:
-    DATABASES = {
-        'default': {
-            'ENGINE' : 'django.db.backends.postgresql',
-            'NAME' : 'Biblios',
-            'USER' : 'usr_biblios',
-            'PASSWORD' : 'Ys3r.818lio5',
-            'HOST' : '10.236.62.59',
-            'PORT' : '5432',
-        }
-    }
+
+# DATABASES = BD_ALL[AMBIENTE]  if AMBIENTE in BD_ALL.keys() else BD_ALL['PRODUCCION']  --Jose
+DATABASES = BD_ALL.get(AMBIENTE, BD_ALL['PRODUCCION'])
+print(f"Base de datos configurada: {DATABASES}")
+
+
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
