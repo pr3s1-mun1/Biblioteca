@@ -25,8 +25,8 @@ CSRF_TRUSTED_ORIGINS = [
     'http://10.236.62.83:8085',
 ]
 
-CSRF_COOKIE_SECURE = True  # Cambia a False si no usas HTTPS
-SESSION_COOKIE_SECURE = True  # Cambia a False si no usas HTTPS
+CSRF_COOKIE_SECURE = False  # Cambia a False si no usas HTTPS
+SESSION_COOKIE_SECURE = False  # Cambia a False si no usas HTTPS
 
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
