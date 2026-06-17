@@ -170,7 +170,7 @@ class UserCreateView(LoginRequiredMixin, AdminRequiredMixin, CreateView):
     model = Registro
     form_class = UserAdminForm
     template_name = 'users/user_form.html'
-    success_url = reverse_lazy('admin_user_list')
+    success_url = reverse_lazy('user_list')
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -186,7 +186,7 @@ class UserUpdateView(LoginRequiredMixin, AdminRequiredMixin, UpdateView):
     model = Registro
     form_class = UserAdminForm
     template_name = 'users/user_form.html'
-    success_url = reverse_lazy('admin_user_list')
+    success_url = reverse_lazy('user_list')
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -201,7 +201,7 @@ class UserUpdateView(LoginRequiredMixin, AdminRequiredMixin, UpdateView):
 class UserDeleteView(LoginRequiredMixin, AdminRequiredMixin, DeleteView):
     model = Registro
     template_name = 'users/user_confirm_delete.html'
-    success_url = reverse_lazy('admin_user_list')
+    success_url = reverse_lazy('user_list')
     context_object_name = 'user_obj'
     
     def delete(self, request, *args, **kwargs):

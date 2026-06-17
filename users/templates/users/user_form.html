@@ -6,7 +6,7 @@
     <!-- Encabezado con tÃ­tulo y botÃ³n de volver -->
     <div class="flex justify-between items-center mb-6">
         <h1 class="text-2xl font-bold">{% if form.instance.pk %}Editar{% else %}Nuevo{% endif %} Usuario</h1>
-        <a href="{% url 'admin_user_list' %}" class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded flex items-center">
+        <a href="{% url 'user_list' %}" class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded flex items-center">
             <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
             </svg>
@@ -170,7 +170,7 @@
                 {% endif %}
                 
                 <div class="mt-6 pt-4 border-t flex justify-end space-x-3">
-                    <a href="{% url 'admin_user_list' %}" class="bg-gray-500 hover:bg-gray-600 text-white py-2 px-4 rounded">
+                    <a href="{% url 'user_list' %}" class="bg-gray-500 hover:bg-gray-600 text-white py-2 px-4 rounded">
                         Cancelar
                     </a>
                     <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white py-2 px-6 rounded">
