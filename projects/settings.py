@@ -122,7 +122,7 @@ WSGI_APPLICATION = 'projects.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-AMBIENTE = 'PRUEBA'
+AMBIENTE = 'PRUEBA_OLD'
 
 BD_ALL = {
         'PRUEBA' : { 
