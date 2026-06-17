@@ -13,7 +13,7 @@ SECRET_KEY = 'django-insecure--w(@_i5)pv&f)2yz_owdps&lmvn$7c9v=tu90dnag4^n2ua360
 
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'biblioaprende.juarez.gob.mx', '10.236.62.83', 'testbibliotecas.juarez.gob.mx']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'biblioaprende.juarez.gob.mx', '10.236.62.83', 'testbibliotecas.juarez.gob.mx', '10.236.62.44']
 
 
 
